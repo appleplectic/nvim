@@ -17,10 +17,15 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-    {'VonHeikemen/lsp-zero.nvim', branch = 'v3.x'},
+    {
+        'VonHeikemen/lsp-zero.nvim',
+        branch = 'v3.x'
+    },
     {'neovim/nvim-lspconfig'},
     {'hrsh7th/cmp-nvim-lsp'},
-    {'hrsh7th/nvim-cmp'},
+    {
+        'hrsh7th/nvim-cmp',
+    },
     {'L3MON4D3/LuaSnip'},
     {'tpope/vim-fugitive'},
     {
@@ -28,8 +33,15 @@ require("lazy").setup({
         branch = "v3.x",
         config = function()
             require("neo-tree").setup {
-                follow_current_file = { enabled = true }
-            }
+                follow_current_file = { enabled = true },
+                filesystem = {
+                    filtered_items = {
+                        visible = true,
+                        hide_dotfiles = false,
+                        hide_gitignored = false
+                    }
+                }
+	    }
         end,
 	dependencies = {
             "nvim-lua/plenary.nvim",
@@ -65,8 +77,11 @@ require("lazy").setup({
         'p00f/cphelper.nvim',
         dependencies = { 'nvim-lua/plenary.nvim' }
     },
+    {"vim-airline/vim-airline"},
     {
-        "vim-airline/vim-airline"
+        'windwp/nvim-autopairs',
+         event = "InsertEnter",
+         config = true
     }
 })
 
@@ -81,13 +96,5 @@ require("lspconfig").gopls.setup({})
 require("lspconfig").rust_analyzer.setup({})
 require("lspconfig").pyright.setup({})
 require("lspconfig").cmake.setup({})
+require("lspconfig").clangd.setup({})
 
-require("neo-tree").setup({
-    filesystem = {
-        filtered_items = {
-            visible = true,
-            hide_dotfiles = false,
-            hide_gitignored = false
-        }
-    }
-})
