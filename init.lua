@@ -1,7 +1,7 @@
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
-vim.opt.mouse = ""
+vim.wo.number = true
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -26,11 +26,16 @@ require("lazy").setup({
     {
         "nvim-neo-tree/neo-tree.nvim",
         branch = "v3.x",
-        dependencies = {
+        config = function()
+            require("neo-tree").setup {
+                follow_current_file = { enabled = true }
+            }
+        end,
+	dependencies = {
             "nvim-lua/plenary.nvim",
             "nvim-tree/nvim-web-devicons",
             "MunifTanjim/nui.nvim",
-        }
+        },
     },
     {
         'nvim-telescope/telescope.nvim',
@@ -59,6 +64,9 @@ require("lazy").setup({
     {
         'p00f/cphelper.nvim',
         dependencies = { 'nvim-lua/plenary.nvim' }
+    },
+    {
+        "vim-airline/vim-airline"
     }
 })
 
